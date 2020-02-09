@@ -1,0 +1,27 @@
+### IoC Container_ApplicationContext와 다양한 세팅 방법
+- 스프링 IoC 컨테이너의 역할
+    - 빈 인스턴스 생성
+    - 의존 관계 설정
+    - 빈 제공
+- ApplicationContext
+    - ClassPathXmlApplicationCntext
+- 빈 설정
+    - 빈 명세서
+    - 빈에 대한 정의를 담고 있다.
+      - 이름
+      - 클래스
+      - 스코프
+      - 생성자 아규먼트 (constructor)
+      - 프로퍼티 (setter)
+- Bean 등록!
+    - xml 파일에 빈 등록 코드를 넣고, 비즈니스 로직에 ClassPathXmlApplicationContext를 통해 빈을 찾는 방법
+    - xml에서 context의 component-scan을 통해 패키지를 지정하고 해당 패키지의 빈을 스캔하여 빈을 등록하는 방법
+    - 자바 설정 파일 이용!
+      - @Configuration을 사용하는 Config 클래스 파일을 하나 만들어 @Bean을 사용하는 메소드를 만들어 Bean을 만들어준다. 그리고 비즈니스 로직에 AnnotationConfigApplicationContext(Config.class)를 통해 불러와 getBean을 사용!
+    - 위에 방법 + @Autowired를 사용해도 의존성이 주입된다.setter를 쓸 경우만 가능 / 생성자는 따로...
+    - @ComponentScan() 사용!  
+      - 안에 파라미터
+        - basePackageClasses: type safety - 클래스를 지정해주면, 클래스를 지정한 곳 부터 컴포넌트 스캐닝을 한다.
+        - basePackages: 패키지 문자열을 직접 지정
+    - @SpringBootApplication -> 스부에서 가장 많이 사용, 비즈니스 로직에서 애노테이션 클래스를 찾을 필요도 없다, 이미 컴포넌트 스캔과 컨피규레이션이 이미 설정되어 있다 내부에.
+    
