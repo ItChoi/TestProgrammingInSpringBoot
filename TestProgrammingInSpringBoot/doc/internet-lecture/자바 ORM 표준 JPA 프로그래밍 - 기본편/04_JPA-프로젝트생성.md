@@ -1,0 +1,31 @@
+### JPA 프로젝트 생성
+- ArtifactId: 빌드되면 나오는 파일
+- 하이버네이트 안정 버전 이외에 낮은 버전을 사용하는 경우는 보통 스프릉 부트 스펙과 맞춰야 해서 !
+- 메이븐 환경에서 JPA 설정하기 - persistence.xml
+    - JPA 설정 파일
+    - /META-INF/persistence.xml 위치 (resources에 META-INF 폴더 만들고
+    - persistence-unit name으로 이름 지정
+    - javax.persistence로 시작: JPA 표준 속성
+    - hibernate로 시작: 하이버네이트 전용 속성
+    - dialect! 
+      - 데이터베이스 방언
+      - JPA는 특정 데이터베이스에 종속 X
+      - 각 DB 제공하는 SQL 문법과 함수는 조금씩 다르다.
+        - 가변 문자: VARCHAR, VARCHAR2
+        - 함수: SUBSTRING(), SUBSTR()
+        - 페이징: LIMIT, ROWNUM
+      - 방언: SQL 표준을 지키지 않는 특정 DB만의 고유한 기능
+      - JPA -> Dialect
+      - Dialect
+        - MySQLDialect -> mysql sql 생성 -> mysql db
+        - OracleDialect -> oracle sql 생성 -> oracle db
+        - H2Dialect -> h2 sql 생성 -> h2 db
+      - hibernate.dialect 속성 지정 (하이버 네이트는 40가지 DB 방언 지원)
+        - H2: org.hibernate.dialect.H2Dialect
+        - Oracle 10g: org.hibernate.dialect.Oracle10gDialect
+        - MySQL: org.hibernate.dialect.MySQL5InnoDBDialect -> InnoDB 안써도 된다
+- 프로퍼티 설정 등 javax, hibernate 등으로 시작하는 url에서!
+    - javax
+      - hibernate 라이브러리 말고 다른 jpa 라이브러리 써도 그대로 적용 (표준 적용)
+    - hibernate
+      - 다른 라이브러리 사용 시 하이버네이트 말고 다른 거로 바꿔야 한다. (하이버네이트 적용)
