@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.jpabook.jpashop.domain.Member;
 import com.jpabook.jpashop.domain.Order;
+import com.jpabook.jpashop.domain.OrderItem;
 
 @SpringBootApplication
 public class Application {
@@ -22,14 +23,16 @@ public class Application {
 		tx.begin();
 		
 		try {
-			Order order = em.find(Order.class, 1L);
-			Long memberId = order.getMemberId();
 			
-			Member member = em.find(Member.class, memberId);
+			Order order = new Order();
+			em.persist(order); // 영속성 컨텍스트에 추가
+			// order.addOrderItem(new OrderItem());
 			
-			Member findMember = order.getMember();
+			OrderItem orderItem = new OrderItem();
+			orderItem.setOrder(order);
 			
 			
+			// db commit -> 영속성 컨텍스트와 DB 동기화
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
